@@ -9,7 +9,7 @@
  *
  *  Rett Bull
  *  April 7, 2009
- *  Modified: David Kauchak 4/7/2010
+ *  Modified: Evan Casey 4/14/2013
  *
  */
 #ifndef PRIORITYQUEUE_H
@@ -80,7 +80,7 @@ public:
    *  new priority must not be greater than the current
    *  priority.
    */
-  void reduce_priority(int key, int newpriority);
+  void reduce_priority(int key, int new_priority);
 
   /*
    *  Returns the priority of the element with the given
@@ -110,14 +110,22 @@ public:
    */
   int size() const;
 
+  
 private:
-  vector<pair<int,int> > heap;
-  map<int,int> location;
+  //variables that we store the queue elements in
+  vector<pair<int,int> > numsVec;
+  map<int,int> numsMap;
 
-  void pushDownRoot(int i);
+  //instance variable to store the size of the queue
+  int queue_size;
+
+  //documentation for these methods provided in .cpp file
+  void percolateUp(int leaf_index);
+  void pushDownRoot(int root_index);
   void swap(int i, int j);
   int left(int parent) const;
   int right(int parent) const;
   int parent(int child) const;
+  int findIndexOf(int priority, int index);
 };
 #endif
